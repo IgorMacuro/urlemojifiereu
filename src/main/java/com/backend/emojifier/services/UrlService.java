@@ -29,7 +29,7 @@ public class UrlService {
     public Url findByEncodedUrl(String encodedUrl) throws UnsupportedEncodingException{
         String decoded = URLDecoder.decode(encodedUrl, "UTF-8");
         log.info("decoded url: " + decoded);
-        String decodedPardedToHtml = EmojiParser.parseToHtmlHexadecimal(decoded);
+        String decodedPardedToHtml = EmojiParser.parseToHtmlDecimal(decoded);
         log.info("Parsed to html: " + decodedPardedToHtml);
         Url found = urlRepository.findByEncodedUrl(decodedPardedToHtml);
         

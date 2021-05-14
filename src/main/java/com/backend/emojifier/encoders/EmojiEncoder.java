@@ -42,7 +42,7 @@ public class EmojiEncoder {
         return finisher.stream();
     }))
         .limit(10)
-        .forEach(em -> sb.append(em.getHtmlHexadecimal()));
+        .forEach(em -> sb.append(em.getHtmlDecimal()));
         this.url.setEncodedUrl(sb.toString());
     }
 
