@@ -21,4 +21,8 @@ public class EmojiController {
         return "hello heroku";
     }
 
+    @GetMapping(path = "/{url}")
+    public @ResponseBody String decode(@PathVariable String url){
+        return "input url: " + url;
+    }
 }
