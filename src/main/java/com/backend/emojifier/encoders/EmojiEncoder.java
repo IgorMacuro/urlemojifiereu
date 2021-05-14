@@ -37,10 +37,16 @@ public class EmojiEncoder {
         this.url.setEncodedUrl(sb.toString());
     }
 
+    private void save(){
+
+    }
     public void encodeUrl(){
         for (int i = 0; i < attempts_num; i++) {
             encode();
-            if(urlRepository.findByEncodedUrl(url.getEncodedUrl()) == null) break;
+            // if(urlRepository.findByEncodedUrl(url.getEncodedUrl()) == null) {
+            //     save();
+            //     break;
+            // }
         }
     }
 
