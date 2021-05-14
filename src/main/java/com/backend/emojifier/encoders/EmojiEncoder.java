@@ -1,6 +1,9 @@
 package com.backend.emojifier.encoders;
 
 
+import java.util.Collections;
+import java.util.stream.Collectors;
+
 import com.vdurmont.emoji.EmojiManager;
 
 public class EmojiEncoder {
@@ -15,6 +18,10 @@ public class EmojiEncoder {
         StringBuilder sb = new StringBuilder();
         EmojiManager.getAll()
         .stream()
+        .collect(Collectors.collectingAndThen(Collectors.toList(), finisher -> {
+        Collections.shuffle(finisher);
+        return finisher.stream();
+    }))
         .limit(10)
         .forEach(em -> sb.append(em.getHtmlHexadecimal()));
         encodedUrl = sb.toString();
