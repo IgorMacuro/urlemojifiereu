@@ -1,18 +1,17 @@
 package com.backend.emojifier.controllers;
 
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
+
+import com.backend.emojifier.encoders.EmojiEncoder;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@CrossOrigin(origins = "hhttps://emojifiereu.herokuapp.com:80")
+@CrossOrigin(origins = "https://emojifiereu.herokuapp.com:80")
 public class EmojiController {
     
     @GetMapping(path = "/")
@@ -27,6 +26,8 @@ public class EmojiController {
 
     @GetMapping (path = "/encode/{url}")
     public @ResponseBody String encode (@PathVariable String url) {
-        return "encoded";
+        EmojiEncoder ee = new EmojiEncoder(url);
+        ee.encode();
+        return ee.getEncodedUrl();
     }
 }
