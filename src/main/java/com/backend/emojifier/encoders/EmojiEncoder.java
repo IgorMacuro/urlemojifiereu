@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.backend.emojifier.entities.Url;
 import com.backend.emojifier.repositories.UrlRepository;
+import com.backend.emojifier.services.UrlService;
 import com.vdurmont.emoji.EmojiManager;
 
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ public class EmojiEncoder {
     public static final Logger log = LoggerFactory.getLogger(EmojiEncoder.class);
 
     @Autowired
-    UrlRepository urlRepository;
+    UrlService urlService;
 
 
     public EmojiEncoder(String url){
@@ -42,9 +43,9 @@ public class EmojiEncoder {
     private void save(){
         log.info("SAVE");
         log.info(this.url.toString());
-        log.info(urlRepository == null ? "rep is null" : "rep is fine");
+        log.info(urlService == null ? "service is null" : "service is fine");
 
-        urlRepository.save(this.url);
+        urlService.save(this.url);
     }
     public void encodeUrl(){
         encode();
