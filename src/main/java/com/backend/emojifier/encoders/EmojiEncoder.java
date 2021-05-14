@@ -23,6 +23,7 @@ public class EmojiEncoder {
     public static final Logger log = LoggerFactory.getLogger(EmojiEncoder.class);
 
     public void setUrl(String url){
+        this.url = new Url();
         this.url.setUrl(url);
     }
 
