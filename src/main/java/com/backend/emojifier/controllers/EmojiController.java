@@ -2,6 +2,8 @@ package com.backend.emojifier.controllers;
 
 
 
+import java.net.URLEncoder;
+
 import com.backend.emojifier.encoders.EmojiEncoder;
 import com.backend.emojifier.repositories.UrlRepository;
 
@@ -15,8 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @CrossOrigin(origins = "https://emojifiereu.herokuapp.com:80")
 public class EmojiController {
     private UrlRepository urlRepository;
-    public EmojiController(UrlRepository urlRepository){
+    private EmojiEncoder ee;
+    public EmojiController(UrlRepository urlRepository, EmojiEncoder emojiEncoder){
         this.urlRepository = urlRepository;
+        this.ee = emojiEncoder;
     }
     
     @GetMapping(path = "/")
@@ -31,7 +35,7 @@ public class EmojiController {
 
     @GetMapping (path = "/encode/{url}")
     public @ResponseBody String encode (@PathVariable String url) {
-        EmojiEncoder ee = new EmojiEncoder(url);
+        ee.setUrl(url);
         ee.encodeUrl();
         return ee.getEncodedUrl();
     }

@@ -18,13 +18,14 @@ public class EmojiEncoder {
     private int attempts_num = 10;
     public static final Logger log = LoggerFactory.getLogger(EmojiEncoder.class);
 
+    public void setUrl(String url){
+        this.url.setUrl(url);
+    }
+
     @Autowired
     UrlService urlService;
 
 
-    public EmojiEncoder(String url){
-        this.url =  new Url(url);
-    }
 
     private void encode(){
         if (this.url.getUrl().isEmpty()) return;
