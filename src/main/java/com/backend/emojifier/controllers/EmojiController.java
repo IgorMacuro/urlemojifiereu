@@ -27,7 +27,7 @@ public class EmojiController {
     @GetMapping (path = "/encode/{url}")
     public @ResponseBody String encode (@PathVariable String url) {
         EmojiEncoder ee = new EmojiEncoder(url);
-        ee.encode();
+        ee.encodeUrl();
         return ee.getEncodedUrl();
     }
 }
