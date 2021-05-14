@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @CrossOrigin(origins = "hhttps://emojifiereu.herokuapp.com:80")
-
 public class EmojiController {
     
     @GetMapping(path = "/")
@@ -24,5 +23,10 @@ public class EmojiController {
     @GetMapping(path = "/{url}")
     public @ResponseBody String decode(@PathVariable String url){
         return "input url: " + url;
+    }
+
+    @GetMapping (path = "/encode/{url}")
+    public @ResponseBody String encode (@PathVariable String url) {
+        return "encoded";
     }
 }
