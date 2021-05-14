@@ -2,9 +2,12 @@ package com.backend.emojifier.controllers;
 
 
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import com.backend.emojifier.encoders.EmojiEncoder;
+import com.backend.emojifier.entities.Error;
+import com.backend.emojifier.entities.Url;
 import com.backend.emojifier.repositories.UrlRepository;
 import com.backend.emojifier.services.UrlService;
 
@@ -34,7 +37,14 @@ public class EmojiController {
 
     @GetMapping(path = "/{url}")
     public @ResponseBody String decode(@PathVariable String url){
-        return "input url: " + urlService.findByEncodedUrl(url);
+        try{
+            Url urlFound = urlService.findByEncodedUrl(url);
+            if(urlFound != null) return urlFound.getUrl();
+        } catch(UnsupportedEncodingException e) {
+            log.error("fishy url", e);
+            return Error.NOT_FOUND;
+        }
+        return Error.NOT_FOUND;
     }
 
     @GetMapping (path = "/encode/{url}")
