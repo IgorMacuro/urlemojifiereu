@@ -38,16 +38,11 @@ public class EmojiEncoder {
     }
 
     private void save(){
-
+        urlRepository.save(this.url);
     }
     public void encodeUrl(){
-        for (int i = 0; i < attempts_num; i++) {
-            encode();
-            // if(urlRepository.findByEncodedUrl(url.getEncodedUrl()) == null) {
-            //     save();
-            //     break;
-            // }
-        }
+        encode();
+        save();
     }
 
     public String getEncodedUrl(){
