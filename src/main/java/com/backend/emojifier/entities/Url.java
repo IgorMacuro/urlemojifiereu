@@ -7,10 +7,12 @@ import javax.persistence.Id;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @Entity
+@ToString
 public class Url {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
