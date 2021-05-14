@@ -3,8 +3,6 @@ package com.backend.emojifier.controllers;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import com.backend.emojifier.model.Match;
-import com.backend.emojifier.repositories.MatchRepository;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
