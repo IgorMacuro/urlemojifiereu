@@ -1,13 +1,13 @@
 package com.backend.emojifier.entities;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -19,8 +19,8 @@ public class Url {
     private Long id;
     private String url;
     private String encodedUrl;
-    
-    public Url(String url){
+
+    public Url(String url) {
         this.url = url;
     }
 
