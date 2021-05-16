@@ -47,12 +47,13 @@ public class EmojiEncoder {
         log.info("SAVE");
         log.info(this.url.toString());
         log.info(urlService == null ? "service is null" : "service is fine");
-
         urlService.save(this.url);
     }
 
     public void encodeUrl() {
         encode();
+    }
+    public void persist(){
         save();
     }
 
