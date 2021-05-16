@@ -34,7 +34,9 @@ public class UrlService {
         log.info("Parsed to html: " + decodedParsedToHtml);
         Url found = urlRepository.findByEncodedUrl(decodedParsedToHtml);
 
-        log.info("Plain url found: " + found.toString()); // change to 
+        if(found != null){
+            log.info("Plain url found: " + found);
+        }
         return found;
     }
 }

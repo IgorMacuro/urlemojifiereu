@@ -48,12 +48,11 @@ public class EmojiController {
 
     @GetMapping(path = "/encode/{url}")
     public @ResponseBody
-    String encode(@PathVariable String url) {
+    Url encode(@PathVariable String url) {
         log.info("controller encode: " + url);
         log.info(emojiEncoder == null ? "EmojiEncoder is null" : "EmojiEncoder is fine");
         emojiEncoder.setUrl(url);
         emojiEncoder.encodeUrl();
-        emojiEncoder.persist();
-        return emojiEncoder.getEncodedUrl();
+        return emojiEncoder.persist();
     }
 }

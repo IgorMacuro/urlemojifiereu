@@ -43,18 +43,18 @@ public class EmojiEncoder {
         this.url.setEncodedUrl(sb.toString());
     }
 
-    private void save() {
+    private Url save() {
         log.info("SAVE");
         log.info(this.url.toString());
         log.info(urlService == null ? "service is null" : "service is fine");
-        urlService.save(this.url);
+        return urlService.save(this.url);
     }
 
     public void encodeUrl() {
         encode();
     }
-    public void persist(){
-        save();
+    public Url persist(){
+        return save();
     }
 
     public String getEncodedUrl() {
