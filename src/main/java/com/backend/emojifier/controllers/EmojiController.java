@@ -7,6 +7,7 @@ import com.backend.emojifier.entities.Url;
 import com.backend.emojifier.services.UrlService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
@@ -42,7 +43,7 @@ public class EmojiController {
         return Error.NOT_FOUND;
     }
 
-    @PostMapping("/encode/{url}")
+    @PostMapping(path="/encode/{url}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     String encode(@PathVariable String url) {
         log.info("controller encode: " + url);
