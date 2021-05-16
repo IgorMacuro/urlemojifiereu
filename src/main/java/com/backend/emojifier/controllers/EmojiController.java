@@ -7,12 +7,15 @@ import com.backend.emojifier.entities.Url;
 import com.backend.emojifier.services.UrlService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.UnsupportedEncodingException;
 
-@RestController
+@Controller
 @CrossOrigin(origins = "https://emojifiereu.herokuapp.com:80")
 public class EmojiController {
     public static final Logger log = LoggerFactory.getLogger(EmojiController.class);
@@ -43,11 +46,12 @@ public class EmojiController {
         return Error.NOT_FOUND;
     }
 
-    @PostMapping(path="/encode", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String encode(@RequestBody String userInput) {
-        log.info("controller encode: " + userInput);
+    @GetMapping(path = "/encode/{url}")
+    public @ResponseBody
+    String encode(@PathVariable String url) {
+        log.info("controller encode: " + url);
         log.info(emojiEncoder == null ? "EmojiEncoder is null" : "EmojiEncoder is fine");
-        emojiEncoder.setUrl(userInput);
+        emojiEncoder.setUrl(url);
         emojiEncoder.encodeUrl();
         emojiEncoder.persist();
         return emojiEncoder.getEncodedUrl();
