@@ -43,12 +43,11 @@ public class EmojiController {
         return Error.NOT_FOUND;
     }
 
-    @PostMapping(path="/encode/{url}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    String encode(@PathVariable String url) {
-        log.info("controller encode: " + url);
+    @PostMapping(path="/encode", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String encode(@RequestBody String userInput) {
+        log.info("controller encode: " + userInput);
         log.info(emojiEncoder == null ? "EmojiEncoder is null" : "EmojiEncoder is fine");
-        emojiEncoder.setUrl(url);
+        emojiEncoder.setUrl(userInput);
         emojiEncoder.encodeUrl();
         emojiEncoder.persist();
         return emojiEncoder.getEncodedUrl();
