@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
@@ -25,11 +28,12 @@ public class EmojiController {
     public static final Logger log = LoggerFactory.getLogger(EmojiController.class);
     private UrlService urlService;
     private EmojiEncoder emojiEncoder;
-    @Autowired
-    private ModelMap model;
-    public EmojiController(UrlService urlService, EmojiEncoder emojiEncoder) {
+    private HttpServletResponse httpServletResponse;
+
+    public EmojiController(UrlService urlService, EmojiEncoder emojiEncoder, HttpServletResponse httpServletResponse) {
         this.urlService = urlService;
         this.emojiEncoder = emojiEncoder;
+        this.httpServletResponse = httpServletResponse;
     }
 
     @GetMapping(path = "/")
@@ -38,10 +42,9 @@ public class EmojiController {
         return urlService.list().toString();
     }
 
-    //hmmm
-    private ModelAndView redirectWithUsingForwardPrefix(String urlTo) {
-        model.addAttribute("attribute", "forwardWithForwardPrefix");
-        return new ModelAndView("forward:/" + urlTo, model);
+    public void forwardTo(String urlTo) {
+        httpServletResponse.setHeader("Location", urlTo);
+        httpServletResponse.setStatus(302);
     }
 
     @GetMapping(path = "/{url}")
@@ -50,7 +53,7 @@ public class EmojiController {
         try {
             Url urlFound = urlService.findByEncodedUrl(url);
             if (urlFound != null) {
-                redirectWithUsingForwardPrefix(
+                forwardTo(
                         //redirecting to base64 decoded url
                         new String(Base64.getUrlDecoder().decode(url))
                 );
