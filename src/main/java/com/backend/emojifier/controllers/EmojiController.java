@@ -38,6 +38,7 @@ public class EmojiController {
         return urlService.list().toString();
     }
 
+    //hmmm
     private ModelAndView redirectWithUsingForwardPrefix(String urlTo) {
         model.addAttribute("attribute", "forwardWithForwardPrefix");
         return new ModelAndView("forward:/" + urlTo, model);
