@@ -7,16 +7,11 @@ import com.backend.emojifier.entities.Url;
 import com.backend.emojifier.services.UrlService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
@@ -55,7 +50,7 @@ public class EmojiController {
             if (urlFound != null) {
                 forwardTo(
                         //redirecting to base64 decoded url
-                        new String(Base64.getUrlDecoder().decode(url))
+                        new String(Base64.getUrlDecoder().decode(urlFound.getUrl()))
                 );
                 return urlFound.getUrl();
             }
