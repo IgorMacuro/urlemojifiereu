@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
@@ -17,12 +18,14 @@ import java.util.stream.Collectors;
 @Configurable
 public class EmojiEncoder {
     private Url url;
-    private int attempts_num = 10;
     public static final Logger log = LoggerFactory.getLogger(EmojiEncoder.class);
 
     public void setUrl(String url) {
         this.url = new Url();
-        this.url.setUrl(url);
+        //saving url as the base64 string
+        this.url.setUrl(
+                Base64.getUrlEncoder().encodeToString(url.getBytes())
+        );
     }
 
     @Autowired
@@ -40,6 +43,7 @@ public class EmojiEncoder {
                 }))
                 .limit(10)
                 .forEach(em -> sb.append(em.getHtmlHexadecimal()));
+
         this.url.setEncodedUrl(sb.toString());
     }
 
@@ -47,6 +51,7 @@ public class EmojiEncoder {
         log.info("SAVE");
         log.info(this.url.toString());
         log.info(urlService == null ? "service is null" : "service is fine");
+
         return urlService.save(this.url);
     }
 
