@@ -22,10 +22,8 @@ public class EmojiEncoder {
 
     public void setUrl(String url) {
         this.url = new Url();
-        //saving url as the base64 string
-        this.url.setUrl(
-                Base64.getUrlEncoder().encodeToString(url.getBytes())
-        );
+        //saving url as the base64 string (url is already base64 encoded from frontend)
+        this.url.setUrl(url);
     }
 
     @Autowired

@@ -66,8 +66,8 @@ public class EmojiController {
     Url encode(@PathVariable String url) {
         log.info("controller encode: " + url);
         log.info(emojiEncoder == null ? "EmojiEncoder is null" : "EmojiEncoder is fine");
-        emojiEncoder.setUrl(url);
-        emojiEncoder.encodeUrl(); //saved in base64
+        emojiEncoder.setUrl(url);//saved in base64
+        emojiEncoder.encodeUrl();
 
         return emojiEncoder.persist();
     }
