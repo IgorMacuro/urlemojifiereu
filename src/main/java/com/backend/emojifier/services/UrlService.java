@@ -3,16 +3,15 @@ package com.backend.emojifier.services;
 import com.backend.emojifier.entities.Url;
 import com.backend.emojifier.repositories.UrlRepository;
 import com.vdurmont.emoji.EmojiParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 @Service
+@Log4j
 public class UrlService {
-    public static final Logger log = LoggerFactory.getLogger(UrlService.class);
     private final UrlRepository urlRepository;
 
     public UrlService(UrlRepository urlRepository) {
@@ -34,7 +33,7 @@ public class UrlService {
         log.info("Parsed to html: " + decodedParsedToHtml);
         Url found = urlRepository.findByEncodedUrl(decodedParsedToHtml);
 
-        if(found != null){
+        if (found != null) {
             log.info("Plain url found: " + found);
         }
         return found;

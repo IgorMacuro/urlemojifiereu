@@ -5,8 +5,7 @@ import com.backend.emojifier.encoders.EmojiEncoder;
 import com.backend.emojifier.entities.Error;
 import com.backend.emojifier.entities.Url;
 import com.backend.emojifier.services.UrlService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;
 
+@Log4j
 @Controller
 @CrossOrigin(origins = "https://emojifiereu.herokuapp.com:80")
 public class EmojiController {
-    public static final Logger log = LoggerFactory.getLogger(EmojiController.class);
+
     private UrlService urlService;
     private EmojiEncoder emojiEncoder;
     private HttpServletResponse httpServletResponse;

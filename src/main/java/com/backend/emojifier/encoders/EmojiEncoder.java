@@ -4,6 +4,7 @@ package com.backend.emojifier.encoders;
 import com.backend.emojifier.entities.Url;
 import com.backend.emojifier.services.UrlService;
 import com.vdurmont.emoji.EmojiManager;
+import lombok.extern.log4j.Log4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,10 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 @Service
+@Log4j
 @Configurable
 public class EmojiEncoder {
     private Url url;
-    public static final Logger log = LoggerFactory.getLogger(EmojiEncoder.class);
 
     public void setUrl(String url) {
         this.url = new Url();
